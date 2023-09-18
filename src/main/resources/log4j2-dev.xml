@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+
+    <!-- 控制台输出 -->
+    <Properties>
+        <Property name="Log_Pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{ip}] [%thread] [%X{traceId}] %-5level %logger{50}:%L - %msg%n" />
+<!--        <Property name="Log_STUOUT" value="%style{%d{yyyy-MM-dd HH:mm:ss.SSS}}{green} [%thread] %style{%-5level}{cyan} %style{%c{1.}.%M(%L)}{yellow}: - %msg%n" />-->
+        <Property name="Log_STUOUT" value="%style{%d{yyyy-MM-dd HH:mm:ss.SSS}}{green} [%X{ip}] [%thread] [%highlight{%X{traceId}}] %style{%-5level}{cyan} %style{%c{1.}.%M(%L)}{yellow}: - %msg%n" />
+        <Property name="log_file_path">E:\\log</Property>
+    </Properties>
+
+    <!-- 控制台输出 -->
+    <Appenders>
+        <Console name="CONSOLE" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="${Log_STUOUT}" disableAnsi="false" noConsoleNoAnsi="false"/>
+        </Console>
+
+        <!-- 按照每天生成日志文件 -->
+        <RollingRandomAccessFile name="ROLL_FILE_ROOT" fileName="${log_file_path}/bsaas-extend.log"
+                      filePattern="${log_file_path}/bsaas-extend.%d{yyyy-MM-dd}-%i.log"
+                      append="false">
+            <PatternLayout pattern="${Log_Pattern}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="500000KB" />
+                <TimeBasedTriggeringPolicy modulate="true" />
+            </Policies>
+            <DefaultRolloverStrategy max="1000"/>
+        </RollingRandomAccessFile>
+    </Appenders>
+    <Loggers>
+        <AsyncLogger name="com.mysql" level="WARN" additivity="false">
+            <AppenderRef ref="ROLL_FILE_ROOT" />
+        </AsyncLogger>
+        <AsyncLogger name="java.sql.Connection" level="DEBUG" />
+        <AsyncLogger name="java.sql.PreparedStatement" level="DEBUG" />
+        <!-- udb应用日志 -->
+        <AsyncLogger name="com.hqwx" level="INFO" />
+        <AsyncLogger name="cn.huanju" level="INFO"  />
+        <AsyncLogger name="com.hqwx.bsaas.extend" level="DEBUG"  />
+
+        <Root level="INFO">
+            <AppenderRef ref="CONSOLE" />
+            <AppenderRef ref="ROLL_FILE_ROOT" />
+        </Root>
+    </Loggers>
+</Configuration>
