@@ -305,12 +305,13 @@ public class StudentScoreServiceImpl implements StudentScoreService {
         analysisPersonal.setName(user.getName());
         analysisPersonal.setMiddleSchoolScore(score);
         analysisPersonal.setGradeMean(totalMean);
-        if (totalStd <= 100) {
-            totalStd = 100D;
-        } else if (totalStd > 900) {
-            totalStd = 900D;
+        analysisPersonal.setGradeStd(totalStd);
+        if (personalTotalStd <= 100) {
+            personalTotalStd = 100D;
+        } else if (personalTotalStd > 900) {
+            personalTotalStd = 900D;
         }
-        analysisPersonal.setGradeStd(totalStd); //小于等于100取100 高于900取900
+        //个人标准分 小于等于100取100 高于900取900
         analysisPersonal.setPersonalStd(personalTotalStd);
         analysisPersonal.setCourse(course);
         analysisPersonalMapper.insert(analysisPersonal);
