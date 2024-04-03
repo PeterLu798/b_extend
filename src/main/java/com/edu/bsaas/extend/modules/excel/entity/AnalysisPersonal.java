@@ -13,9 +13,9 @@ public class AnalysisPersonal {
     private String className;
 
     /**
-     * 学号
+     * 考号
      */
-    @ExcelProperty(value = "学号")
+    @ExcelProperty(value = "考号")
     private Long studentId;
 
     /**

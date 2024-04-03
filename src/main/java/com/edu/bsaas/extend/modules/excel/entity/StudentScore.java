@@ -11,7 +11,7 @@ public class StudentScore {
 //    @ExcelProperty(value = "年级")
 //    private String grade;
 
-    @ExcelProperty(value = "学号")
+    @ExcelProperty(value = "考号")
     private Long studentId;
 
     @ExcelProperty(value = "姓名")
@@ -70,6 +70,9 @@ public class StudentScore {
 
     @ExcelProperty(value = "地理")
     private Double geography;
+
+    @ExcelProperty(value = "选做最高分")
+    private Double highestScore;
 
     @ExcelProperty(value = "总分")
     private Double middleSchoolScore;

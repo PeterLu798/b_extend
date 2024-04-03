@@ -67,7 +67,7 @@ public class StudentScoreServiceImpl implements StudentScoreService {
                 classMap.put(user.getClassName(), scoreList);
 
                 total.add(user.getChinese() + user.getMathematics() + user.getEnglish() + user.getPhysics() + user.getChemistry()
-                        + user.getOrganism() + user.getPolitics() + user.getHistory() + user.getGeography());
+                        + user.getOrganism() + user.getPolitics() + user.getHistory() + user.getGeography() + user.getHighestScore());
                 totalChinese.add(user.getChinese());
                 totalMathematics.add(user.getMathematics());
                 totalEnglish.add(user.getEnglish());
@@ -130,7 +130,7 @@ public class StudentScoreServiceImpl implements StudentScoreService {
                     double classGeographyStd = 0;
                     for (StudentScore user : scoreList) {
                         double personalTotalStd = computeStdScore(user.getChinese() + user.getMathematics() + user.getEnglish() + user.getPhysics() +
-                                        user.getChemistry() + user.getOrganism() + user.getPolitics() + user.getHistory() + user.getGeography(),
+                                        user.getChemistry() + user.getOrganism() + user.getPolitics() + user.getHistory() + user.getGeography() + user.getHighestScore(),
                                 totalMean, totalStd);
                         saveAnalysisPersonal("总分", totalMean, totalStd, className, user, personalTotalStd, user.getMiddleSchoolScore());
                         classTotalStd = classTotalStd + personalTotalStd;
