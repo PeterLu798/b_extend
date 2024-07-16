@@ -306,7 +306,9 @@ public class StudentScoreServiceImpl implements StudentScoreService {
         analysisPersonal.setMiddleSchoolScore(score);
         analysisPersonal.setGradeMean(totalMean);
         analysisPersonal.setGradeStd(totalStd);
-        if (personalTotalStd <= 100) {
+        if (Double.isNaN(personalTotalStd)) {
+            personalTotalStd = 0.0;
+        } else if (personalTotalStd <= 100) {
             personalTotalStd = 100D;
         } else if (personalTotalStd > 900) {
             personalTotalStd = 900D;
